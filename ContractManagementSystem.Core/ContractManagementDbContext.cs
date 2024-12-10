@@ -5,7 +5,6 @@ namespace ContractManagementSystem.Core
 {
     public class ContractManagementDbContext : DbContext
     {
-        public ContractManagementDbContext(DbContextOptions options) :base(options) { }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Addendum> Addendums { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }
@@ -16,7 +15,7 @@ namespace ContractManagementSystem.Core
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-0RFC93L;Database=ContractManagementDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-0RFC93L;Database=ContractManagementDB;Trusted_Connection=True;TrustServerCertificate=True");
             }
         }
 
