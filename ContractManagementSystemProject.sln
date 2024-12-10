@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractManagementSystem.BL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractManagementSystem.Core", "ContractManagementSystem.Core\ContractManagementSystem.Core.csproj", "{52290358-E69D-495A-BE55-AB20A8FFDF89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractManagementSystem.DAL", "ContractManagementSystem.DAL\ContractManagementSystem.DAL.csproj", "{9DBB90F8-441E-4834-B541-B24FD79FF35C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{52290358-E69D-495A-BE55-AB20A8FFDF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52290358-E69D-495A-BE55-AB20A8FFDF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52290358-E69D-495A-BE55-AB20A8FFDF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBB90F8-441E-4834-B541-B24FD79FF35C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBB90F8-441E-4834-B541-B24FD79FF35C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBB90F8-441E-4834-B541-B24FD79FF35C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBB90F8-441E-4834-B541-B24FD79FF35C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
