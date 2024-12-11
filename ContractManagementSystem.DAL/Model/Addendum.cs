@@ -3,12 +3,12 @@ namespace ContractManagementSystem.DAL.Model
 {
     public class Addendum
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string AddendumNumber { get; set; }
         public DateTime SignedDate { get; set; }
 
         // Many-to-One relationship with Contract
-        public int ContractId { get; set; }
+        public Guid ContractId { get; set; }
         public Contract Contract { get; set; }
 
         // One-to-Many relationship with Product Items
