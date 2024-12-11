@@ -1,4 +1,4 @@
-﻿using ContractManagementSystem.DAL.Model;
+﻿using ContractManagementSystem.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContractManagementSystem.Core

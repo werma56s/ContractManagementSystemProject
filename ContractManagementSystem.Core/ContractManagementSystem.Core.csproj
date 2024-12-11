@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContractManagementSystem.DAL\ContractManagementSystem.DAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Enums\" />
   </ItemGroup>
 

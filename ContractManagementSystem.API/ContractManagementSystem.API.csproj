@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContractManagementSystem.BL\ContractManagementSystem.BL.csproj" />
+    <ProjectReference Include="..\ContractManagementSystem.Core\ContractManagementSystem.Core.csproj" />
+    <ProjectReference Include="..\ContractManagementSystem.DAL\ContractManagementSystem.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
