@@ -5,19 +5,23 @@ namespace ContractManagementSystem.Core
 {
     public class ContractManagementDbContext : DbContext
     {
+        public ContractManagementDbContext(DbContextOptions<ContractManagementDbContext> options)
+       : base(options)
+        {
+        }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Addendum> Addendums { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }
         public DbSet<ResponsiblePerson> ResponsiblePersons { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-0RFC93L;Database=ContractManagementDB;Trusted_Connection=True;TrustServerCertificate=True");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Server=DESKTOP-0RFC93L;Database=ContractManagementDB;Trusted_Connection=True;TrustServerCertificate=True");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

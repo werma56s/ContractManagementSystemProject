@@ -1,6 +1,6 @@
 @ContractManagementSystem.API_HostAddress = http://localhost:5213
 
-GET {{ContractManagementSystem.API_HostAddress}}/weatherforecast/
+GET {{ContractManagementSystem.API_HostAddress}}/api/contracts
 Accept: application/json
 
 ###
