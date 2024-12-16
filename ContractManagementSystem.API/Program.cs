@@ -7,6 +7,9 @@ using ContractManagementSystem.BL.BusinessLogicServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Add services to the container. (db, unitOfWork)
 builder.Services.AddDbContext<ContractManagementDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
