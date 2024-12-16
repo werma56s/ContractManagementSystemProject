@@ -28,7 +28,7 @@ namespace ContractManagementSystem.Core.Domain
         [MaxLength(100)]
         public string Position { get; set; } = string.Empty;
 
-        public Guid AddendumId { get; set; }
+        public Guid? AddendumId { get; set; }
         public Addendum Addendum { get; set; }
     }
 

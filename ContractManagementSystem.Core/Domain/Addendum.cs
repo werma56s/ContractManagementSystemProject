@@ -1,5 +1,6 @@
 ﻿using ContractManagementSystem.Core.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Contracts;
 
 namespace ContractManagementSystem.Core.Domain
@@ -27,8 +28,8 @@ namespace ContractManagementSystem.Core.Domain
 
         [Required]
         public DateTime SignedDate { get; set; }
-
-        public Guid ContractId { get; set; }
+        
+        public Guid? ContractId { get; set; }
         public Contract Contract { get; set; }
 
         public ICollection<ProductItem> ProductItems { get; set; } = new List<ProductItem>();

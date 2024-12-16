@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContractManagementSystem.Core.Migrations
 {
     [DbContext(typeof(ContractManagementDbContext))]
-    [Migration("20241216144348_without_constructor")]
-    partial class without_constructor
+    [Migration("20241216151226_All")]
+    partial class All
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
