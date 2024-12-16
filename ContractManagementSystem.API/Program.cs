@@ -7,15 +7,15 @@ using ContractManagementSystem.BL.BusinessLogicServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container. (db, unitOfWork)
+builder.Services.AddDbContext<ContractManagementDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllers();
 
 // Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Add services to the container. (db, unitOfWork)
-builder.Services.AddDbContext<ContractManagementDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IContractService, ContractService>();
