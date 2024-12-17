@@ -1,5 +1,8 @@
 ﻿using ContractManagementSystem.Core;
-using ContractManagementSystem.DAL.Model;
+using ContractManagementSystem.Core.Domain;
+
+
+//using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
 
 

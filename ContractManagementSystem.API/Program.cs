@@ -2,6 +2,8 @@ using ContractManagementSystem.DAL.Services;
 using ContractManagementSystem.DAL.Services.Interfaces;
 using ContractManagementSystem.Core;
 using Microsoft.EntityFrameworkCore;
+using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
+using ContractManagementSystem.BL.BusinessLogicServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +18,13 @@ builder.Services.AddDbContext<ContractManagementDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddScoped<IContractService, ContractService>();
+builder.Services.AddScoped<IContractService, ContractService>();
 //builder.Services.AddScoped<IAddendumService, AddendumService>();
 //builder.Services.AddScoped<IProductItemService, ProductItemService>();
 //builder.Services.AddScoped<IResponsiblePersonService, ResponsiblePersonService>();
 //builder.Services.AddScoped<ICategoryService, CategoryService>();
 //builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();

@@ -1,4 +1,6 @@
-﻿using ContractManagementSystem.DAL.Model;
+﻿//using ContractManagementSystem.DAL.Model;
+
+using ContractManagementSystem.Core.Domain;
 
 namespace ContractManagementSystem.DAL.Services.Interfaces
 {

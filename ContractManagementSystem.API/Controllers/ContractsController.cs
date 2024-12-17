@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
+using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.DTOs.Contract;
-using ContractManagementSystem.DAL.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContractManagementSystem.API.Controllers

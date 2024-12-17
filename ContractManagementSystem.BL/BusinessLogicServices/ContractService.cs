@@ -1,5 +1,7 @@
 ﻿using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
-using ContractManagementSystem.DAL.Model;
+using ContractManagementSystem.Core.Domain;
+
+//using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices

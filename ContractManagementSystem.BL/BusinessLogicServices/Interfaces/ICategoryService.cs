@@ -1,4 +1,4 @@
-﻿using ContractManagementSystem.DAL.Model;
+﻿using ContractManagementSystem.Core.Domain;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
 {
