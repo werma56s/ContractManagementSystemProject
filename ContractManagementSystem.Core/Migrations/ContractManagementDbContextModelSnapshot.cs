@@ -22,7 +22,7 @@ namespace ContractManagementSystem.Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Addendum", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Addendum", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,6 +35,21 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("SignedDate")
                         .HasColumnType("datetime2");
 
@@ -45,26 +60,42 @@ namespace ContractManagementSystem.Core.Migrations
                     b.ToTable("Addendums");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Category", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1023)
+                        .HasColumnType("nvarchar(1023)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Contract", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Contract", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,12 +104,28 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -94,7 +141,7 @@ namespace ContractManagementSystem.Core.Migrations
                     b.ToTable("Contracts");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.ProductItem", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.ProductItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,12 +150,28 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Property<Guid>("AddendumId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -120,7 +183,7 @@ namespace ContractManagementSystem.Core.Migrations
                     b.ToTable("ProductItems");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.ResponsiblePerson", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.ResponsiblePerson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,17 +192,35 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Property<Guid>("AddendumId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Position")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -148,9 +229,9 @@ namespace ContractManagementSystem.Core.Migrations
                     b.ToTable("ResponsiblePersons");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Addendum", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Addendum", b =>
                 {
-                    b.HasOne("ContractManagementSystem.DAL.Model.Contract", "Contract")
+                    b.HasOne("ContractManagementSystem.Core.Domain.Contract", "Contract")
                         .WithMany("Addendums")
                         .HasForeignKey("ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -159,20 +240,20 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Navigation("Contract");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Contract", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Contract", b =>
                 {
-                    b.HasOne("ContractManagementSystem.DAL.Model.Category", "Category")
+                    b.HasOne("ContractManagementSystem.Core.Domain.Category", "Category")
                         .WithOne("Contract")
-                        .HasForeignKey("ContractManagementSystem.DAL.Model.Contract", "CategoryId")
+                        .HasForeignKey("ContractManagementSystem.Core.Domain.Contract", "CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.ProductItem", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.ProductItem", b =>
                 {
-                    b.HasOne("ContractManagementSystem.DAL.Model.Addendum", "Addendum")
+                    b.HasOne("ContractManagementSystem.Core.Domain.Addendum", "Addendum")
                         .WithMany("ProductItems")
                         .HasForeignKey("AddendumId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -181,9 +262,9 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Navigation("Addendum");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.ResponsiblePerson", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.ResponsiblePerson", b =>
                 {
-                    b.HasOne("ContractManagementSystem.DAL.Model.Addendum", "Addendum")
+                    b.HasOne("ContractManagementSystem.Core.Domain.Addendum", "Addendum")
                         .WithMany("ResponsiblePersons")
                         .HasForeignKey("AddendumId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -192,20 +273,20 @@ namespace ContractManagementSystem.Core.Migrations
                     b.Navigation("Addendum");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Addendum", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Addendum", b =>
                 {
                     b.Navigation("ProductItems");
 
                     b.Navigation("ResponsiblePersons");
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Category", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Category", b =>
                 {
                     b.Navigation("Contract")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ContractManagementSystem.DAL.Model.Contract", b =>
+            modelBuilder.Entity("ContractManagementSystem.Core.Domain.Contract", b =>
                 {
                     b.Navigation("Addendums");
                 });

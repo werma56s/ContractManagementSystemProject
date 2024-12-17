@@ -31,7 +31,7 @@ namespace ContractManagementSystem.Core.Domain
         [Required]
         public int Quantity { get; set; }
 
-        public Guid AddendumId { get; set; }
+        public Guid? AddendumId { get; set; }
         public Addendum Addendum { get; set; }
     }
 
