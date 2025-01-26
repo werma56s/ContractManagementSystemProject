@@ -1,5 +1,9 @@
 ﻿using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
 using ContractManagementSystem.Core.Domain;
+using ContractManagementSystem.DAL.Assemblers;
+using ContractManagementSystem.DAL.DTOs.Contract;
+
+
 
 //using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
@@ -9,15 +13,17 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
     public class ContractService : IContractService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ContractAssemblers _contractAssemblers;
 
-        public ContractService(IUnitOfWork unitOfWork)
+        public ContractService(IUnitOfWork unitOfWork, ContractAssemblers contractAssemblers)
         {
             _unitOfWork = unitOfWork;
+            _contractAssemblers = contractAssemblers;
         }
 
-        public IEnumerable<Contract> GetAllContracts()
+        public List<ContractDto> GetAllContracts()
         {
-            return _unitOfWork.Contracts.GetAll().ToList();
+            return _unitOfWork.Contracts.GetAll().Select(_contractAssemblers.ExpGetContractDto).ToList();
         }
 
         public Contract GetContractById(Guid id)

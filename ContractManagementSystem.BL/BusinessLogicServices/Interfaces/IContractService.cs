@@ -1,10 +1,11 @@
 ﻿using ContractManagementSystem.Core.Domain;
+using ContractManagementSystem.DAL.DTOs.Contract;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
 {
     public interface IContractService
     {
-        IEnumerable<Contract> GetAllContracts();
+        List<ContractDto> GetAllContracts();
         Contract GetContractById(Guid id);
         void AddContract(Contract contract);
         void UpdateContract(Contract contract);

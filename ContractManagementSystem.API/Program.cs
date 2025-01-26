@@ -4,11 +4,12 @@ using ContractManagementSystem.Core;
 using Microsoft.EntityFrameworkCore;
 using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
 using ContractManagementSystem.BL.BusinessLogicServices;
+using ContractManagementSystem.DAL.Assemblers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add AutoMapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container. (db, unitOfWork)
 builder.Services.AddDbContext<ContractManagementDbContext>(options =>
@@ -27,7 +28,9 @@ builder.Services.AddScoped<IContractService, ContractService>();
 //builder.Services.AddScoped<IResponsiblePersonService, ResponsiblePersonService>();
 //builder.Services.AddScoped<ICategoryService, CategoryService>();
 //builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSingleton<ContractAssemblers>();
 
 
 var app = builder.Build();
