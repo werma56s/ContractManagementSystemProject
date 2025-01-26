@@ -2,6 +2,7 @@
 using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.Assemblers;
 using ContractManagementSystem.DAL.DTOs.Contract;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -36,7 +37,7 @@ namespace ContractManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public async Task<CreateContractDto> Add([FromBody] CreateContractDto createDto)
+        public async Task<UpsertContractDto> Add([FromBody] UpsertContractDto createDto)
         {
             try
             {
@@ -49,17 +50,20 @@ namespace ContractManagementSystem.API.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Update(Guid id, [FromBody] UpdateContractDto updateDto)
-        //{
-        //    if (id != updateDto.Id)
-        //        return BadRequest();
+        [HttpPut("{id}")]
+        public Task<ContractDto> Update(Guid id, [FromBody] UpsertContractDto createDto)
+        {
 
-        //    var contract = _mapper.Map<Contract>(updateDto);
-        //    _contractService.UpdateContract(contract);
-
-        //    return NoContent();
-        //}
+            try
+            {
+                _contractService.UpdateContract(id, createDto);
+                return GetById(id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         //[HttpDelete("{id}")]
         //public IActionResult Delete(Guid id)

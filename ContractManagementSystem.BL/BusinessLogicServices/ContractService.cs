@@ -33,7 +33,7 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
                               .FirstOrDefault();
         }
 
-        public void AddContract(CreateContractDto contractDto)
+        public void AddContract(UpsertContractDto contractDto)
         {
                 // Mapowanie ContractDto -> Contract
                 var contract = _contractAssemblers.MapToContract(contractDto);
@@ -43,8 +43,9 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
                 _unitOfWork.SaveChanges();
         }
 
-        public void UpdateContract(Contract contract)
+        public void UpdateContract(Guid Id, UpsertContractDto contractDto)
         {
+             var contract = _contractAssemblers.MapToContract(contractDto,Id);
             _unitOfWork.Contracts.Update(contract);
             _unitOfWork.SaveChanges();
         }

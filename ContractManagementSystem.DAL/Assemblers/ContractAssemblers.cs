@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.DTOs.Contract;
 
@@ -27,18 +28,29 @@ namespace ContractManagementSystem.DAL.Assemblers
             }
         };
         // Mapowanie ContractDto -> Contract (tu zwykła metoda)
-        public Contract MapToContract(CreateContractDto dto)
+        public Contract MapToContract( UpsertContractDto dto, Guid? Id = null)
         {
-            return new Contract
+            var contract = new Contract
             {
-                Id = Guid.NewGuid(), 
-                DateCreated = DateTime.UtcNow,
+                Id = Id ?? Guid.NewGuid(),  // Jeśli Id jest null, przypisujemy nowy GUID
                 Name = dto.Name,
                 StartDate = dto.StartDate,
                 EndDate = dto.EndDate,
                 Value = dto.Value,
                 CategoryId = dto.CategoryId,
             };
+
+            // Warunkowe przypisanie DateCreated lub DateModified
+            if (Id == null)
+            {
+                contract.DateCreated = DateTime.UtcNow;
+            }
+            else
+            {
+                contract.DateModified = DateTime.UtcNow;
+            }
+
+            return contract;
         }
     }
 }

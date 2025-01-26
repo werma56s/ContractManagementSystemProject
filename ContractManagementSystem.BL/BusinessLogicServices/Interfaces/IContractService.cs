@@ -7,8 +7,8 @@ namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
     {
         List<ContractDto> GetAllContracts();
         ContractDto GetContractById(Guid id);
-        void AddContract(CreateContractDto contract);
-        void UpdateContract(Contract contract);
+        void AddContract(UpsertContractDto contract);
+        void UpdateContract(Guid Id, UpsertContractDto contract);
         void DeleteContract(Guid id);
     }
 }
