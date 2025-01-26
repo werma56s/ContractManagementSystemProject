@@ -35,20 +35,19 @@ namespace ContractManagementSystem.API.Controllers
             return contractDtos;
         }
 
-        //[HttpPost]
-        //public IActionResult Add([FromBody] CreateContractDto createDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-
-        //    //var contract = _mapper.Map<Contract>(createDto);
-
-
-        //    //_contractService.AddContract(contract);
-
-        //    //var contractDto = _mapper.Map<ContractDto>(contract);
-        //    //return CreatedAtAction(nameof(GetById), new { id = contract.Id }, contractDto);
-        //}
+        [HttpPost]
+        public async Task<CreateContractDto> Add([FromBody] CreateContractDto createDto)
+        {
+            try
+            {
+                _contractService.AddContract(createDto);
+                return createDto;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         //[HttpPut("{id}")]
         //public IActionResult Update(Guid id, [FromBody] UpdateContractDto updateDto)

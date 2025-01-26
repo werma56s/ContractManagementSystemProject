@@ -6,6 +6,7 @@ namespace ContractManagementSystem.DAL.Assemblers
 {
     public class ContractAssemblers
     {
+        // Mapowanie Contract -> ContractDto
         public Expression<Func<Contract, ContractDto>> ExpGetContractDto { get; } = domain => new ContractDto()
         {
             Id = domain.Id,
@@ -25,5 +26,19 @@ namespace ContractManagementSystem.DAL.Assemblers
                 Description = domain.Category.Description,
             }
         };
+        // Mapowanie ContractDto -> Contract (tu zwykła metoda)
+        public Contract MapToContract(CreateContractDto dto)
+        {
+            return new Contract
+            {
+                Id = Guid.NewGuid(), 
+                DateCreated = DateTime.UtcNow,
+                Name = dto.Name,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                Value = dto.Value,
+                CategoryId = dto.CategoryId,
+            };
+        }
     }
 }

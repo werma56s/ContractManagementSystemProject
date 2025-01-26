@@ -23,6 +23,7 @@ namespace ContractManagementSystem.DAL.DTOs.Contract
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public decimal Value { get; set; }
+        public string? Description { get; set; }
 
         public CategoryDTO Category { get; set; }
         //    public Guid CategoryId { get; set; }

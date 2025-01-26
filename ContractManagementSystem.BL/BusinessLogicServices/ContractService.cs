@@ -33,10 +33,14 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
                               .FirstOrDefault();
         }
 
-        public void AddContract(Contract contract)
+        public void AddContract(CreateContractDto contractDto)
         {
-            _unitOfWork.Contracts.Add(contract);
-            _unitOfWork.SaveChanges();
+                // Mapowanie ContractDto -> Contract
+                var contract = _contractAssemblers.MapToContract(contractDto);
+                // Dodanie nowego kontraktu do bazy danych
+                _unitOfWork.Contracts.Add(contract);
+                // Zapisanie zmian
+                _unitOfWork.SaveChanges();
         }
 
         public void UpdateContract(Contract contract)
