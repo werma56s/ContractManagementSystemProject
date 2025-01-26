@@ -26,9 +26,11 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
             return _unitOfWork.Contracts.GetAll().Select(_contractAssemblers.ExpGetContractDto).ToList();
         }
 
-        public Contract GetContractById(Guid id)
-        {
-            return _unitOfWork.Contracts.GetById(id);
+        public ContractDto GetContractById(Guid id)
+        {   
+            return _unitOfWork.Contracts.GetAll().Where(c => c.Id == id)
+                              .Select(_contractAssemblers.ExpGetContractDto)
+                              .FirstOrDefault();
         }
 
         public void AddContract(Contract contract)

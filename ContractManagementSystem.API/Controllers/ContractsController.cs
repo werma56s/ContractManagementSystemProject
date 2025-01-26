@@ -25,16 +25,15 @@ namespace ContractManagementSystem.API.Controllers
             return contractDtos;
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(Guid id)
-        //{
-        //    var contract = _contractService.GetContractById(id);
-        //    if (contract == null)
-        //        return NotFound();
+        [HttpGet("{id}")]
+        public async Task<ContractDto> GetById(Guid id)
+        {
+            var contractDtos = _contractService.GetContractById(id);
+            if (contractDtos == null)
+                return null;
 
-        //    //var contractDto = _mapper.Map<ContractDto>(contract);
-        //    return Ok(contract);//contractDto
-        //}
+            return contractDtos;
+        }
 
         //[HttpPost]
         //public IActionResult Add([FromBody] CreateContractDto createDto)

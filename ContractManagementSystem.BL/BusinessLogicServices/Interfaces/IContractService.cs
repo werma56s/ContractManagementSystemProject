@@ -6,7 +6,7 @@ namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
     public interface IContractService
     {
         List<ContractDto> GetAllContracts();
-        Contract GetContractById(Guid id);
+        ContractDto GetContractById(Guid id);
         void AddContract(Contract contract);
         void UpdateContract(Contract contract);
         void DeleteContract(Guid id);
