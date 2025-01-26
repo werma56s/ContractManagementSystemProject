@@ -1,5 +1,9 @@
 ﻿using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
 using ContractManagementSystem.Core.Domain;
+using ContractManagementSystem.DAL.Assemblers;
+using ContractManagementSystem.DAL.DTOs.Contract;
+
+
 
 //using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
@@ -9,40 +13,51 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
     public class ContractService : IContractService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ContractAssemblers _contractAssemblers;
 
-        public ContractService(IUnitOfWork unitOfWork)
+        public ContractService(IUnitOfWork unitOfWork, ContractAssemblers contractAssemblers)
         {
             _unitOfWork = unitOfWork;
+            _contractAssemblers = contractAssemblers;
         }
 
-        public IEnumerable<Contract> GetAllContracts()
+        public List<ContractDto> GetAllContracts()
         {
-            return _unitOfWork.Contracts.GetAll().ToList();
+            return _unitOfWork.Contracts.GetAll().Where(x=>x.IsDeleted==false).Select(_contractAssemblers.ExpGetContractDto).ToList();
         }
 
-        public Contract GetContractById(Guid id)
-        {
-            return _unitOfWork.Contracts.GetById(id);
+        public ContractDto GetContractById(Guid id)
+        {   
+            return _unitOfWork.Contracts.GetAll().Where(x => x.IsDeleted == false).Where(c => c.Id == id)
+                              .Select(_contractAssemblers.ExpGetContractDto)
+                              .First();
         }
 
-        public void AddContract(Contract contract)
+        public void AddContract(UpsertContractDto contractDto)
         {
-            _unitOfWork.Contracts.Add(contract);
-            _unitOfWork.SaveChanges();
+                // Mapowanie ContractDto -> Contract
+                var contract = _contractAssemblers.MapToContract(contractDto);
+                // Dodanie nowego kontraktu do bazy danych
+                _unitOfWork.Contracts.Add(contract);
+                // Zapisanie zmian
+                _unitOfWork.SaveChanges();
         }
 
-        public void UpdateContract(Contract contract)
+        public void UpdateContract(Guid Id, UpsertContractDto contractDto)
         {
+             var contract = _contractAssemblers.MapToContract(contractDto,Id);
             _unitOfWork.Contracts.Update(contract);
             _unitOfWork.SaveChanges();
         }
 
         public void DeleteContract(Guid id)
         {
-            var contract = _unitOfWork.Contracts.GetById(id);
+            var contract = _unitOfWork.Contracts.GetAll().Where(x => x.IsDeleted == false).Where(c => c.Id == id).First();
             if (contract != null)
             {
-                _unitOfWork.Contracts.Delete(contract);
+                // Ustawiamy flagę IsDeleted na true
+                contract.IsDeleted = true;
+                // Zapisujemy zmiany w bazie danych
                 _unitOfWork.SaveChanges();
             }
         }

@@ -26,7 +26,7 @@ namespace ContractManagementSystem.Core.Domain
         [MaxLength(1023)]
         public string? Description { get; set; }
 
-        public Contract Contract { get; set; }
+        public ICollection<Contract> Contracts { get; set; }
 
     }
 }

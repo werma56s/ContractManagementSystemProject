@@ -30,11 +30,11 @@ namespace ContractManagementSystem.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure One-to-One relationship between Contract and Category
+            // Configure One-to-Many relationship between Contract and Category
             modelBuilder.Entity<Contract>()
                 .HasOne(c => c.Category)
-                .WithOne(cat => cat.Contract)
-                .HasForeignKey<Contract>(c => c.CategoryId)
+                .WithMany(cat => cat.Contracts)
+                .HasForeignKey(c => c.CategoryId)
                 .IsRequired();
 
             // Configure One-to-Many relationship between Contract and Addendums

@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace ContractManagementSystem.DAL.DTOs.Contract
 {
-    public class UpdateContractDto
+    public class UpsertContractDto
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;
         public DateTime? EndDate { get; set; }
         public decimal Value { get; set; }
-        public Guid CategoryId { get; set; }
+        //public Guid? CategoryId { get; set; }
+        public string? Description { get; set; }
+        public Guid? CategoryId { get; set; }
     }
 
 }

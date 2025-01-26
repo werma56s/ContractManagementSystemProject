@@ -1,8 +1,11 @@
-﻿using AutoMapper;
+﻿using ContractManagementSystem.BL.BusinessLogicServices;
 using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
 using ContractManagementSystem.Core.Domain;
+using ContractManagementSystem.DAL.Assemblers;
 using ContractManagementSystem.DAL.DTOs.Contract;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ContractManagementSystem.API.Controllers
 {
@@ -11,63 +14,74 @@ namespace ContractManagementSystem.API.Controllers
     public class ContractsController : ControllerBase
     {
         private readonly IContractService _contractService;
-        private readonly IMapper _mapper;
 
-        public ContractsController(IContractService contractService, IMapper mapper)
+        public ContractsController(IContractService contractService)
         {
             _contractService = contractService;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<List<ContractDto>> GetAll()
         {
-            var contracts = _contractService.GetAllContracts();
-            var contractDtos = _mapper.Map<IEnumerable<ContractDto>>(contracts);
-            return Ok(contractDtos);
+            var contractDtos = _contractService.GetAllContracts();
+            return contractDtos;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var contract = _contractService.GetContractById(id);
-            if (contract == null)
-                return NotFound();
+            var contractDtos = _contractService.GetContractById(id);
+            if (contractDtos == null)
+                return NotFound("Not Found");
 
-            var contractDto = _mapper.Map<ContractDto>(contract);
-            return Ok(contractDto);
+            return Ok(contractDtos);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] CreateContractDto createDto)
+        public async Task<UpsertContractDto> Add([FromBody] UpsertContractDto createDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var contract = _mapper.Map<Contract>(createDto);
-            _contractService.AddContract(contract);
-
-            var contractDto = _mapper.Map<ContractDto>(contract);
-            return CreatedAtAction(nameof(GetById), new { id = contract.Id }, contractDto);
+            try
+            {
+                _contractService.AddContract(createDto);
+                return createDto;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody] UpdateContractDto updateDto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpsertContractDto createDto)
         {
-            if (id != updateDto.Id)
-                return BadRequest();
 
-            var contract = _mapper.Map<Contract>(updateDto);
-            _contractService.UpdateContract(contract);
-
-            return NoContent();
+            try
+            {
+                _contractService.UpdateContract(id, createDto);
+                return await GetById(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            _contractService.DeleteContract(id);
-            return NoContent();
+            try
+            {
+                // (ustawiamy IsDeleted na true)
+                _contractService.DeleteContract(id);
+
+                // Zwracamy 200 OK
+                return Ok("Deleted");
+            }
+            catch (Exception ex)
+            {
+                // Zwracamy 500 Internal Server Error z komunikatem błędu
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

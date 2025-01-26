@@ -46,7 +46,7 @@ namespace ContractManagementSystem.Core.Domain
         // Relacja jeden-do-wielu z Addendum
         public ICollection<Addendum> Addendums { get; set; } = new List<Addendum>();
 
-        // Relacja jeden-do-jeden z Category
+        // Relacja jeden-do-wielu z Category
         [Required]
         public Guid? CategoryId { get; set; }
 
