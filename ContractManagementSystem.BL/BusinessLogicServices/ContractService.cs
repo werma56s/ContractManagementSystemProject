@@ -23,14 +23,14 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
 
         public List<ContractDto> GetAllContracts()
         {
-            return _unitOfWork.Contracts.GetAll().Select(_contractAssemblers.ExpGetContractDto).ToList();
+            return _unitOfWork.Contracts.GetAll().Where(x=>x.IsDeleted==false).Select(_contractAssemblers.ExpGetContractDto).ToList();
         }
 
         public ContractDto GetContractById(Guid id)
         {   
-            return _unitOfWork.Contracts.GetAll().Where(c => c.Id == id)
+            return _unitOfWork.Contracts.GetAll().Where(x => x.IsDeleted == false).Where(c => c.Id == id)
                               .Select(_contractAssemblers.ExpGetContractDto)
-                              .FirstOrDefault();
+                              .First();
         }
 
         public void AddContract(UpsertContractDto contractDto)
@@ -52,10 +52,12 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
 
         public void DeleteContract(Guid id)
         {
-            var contract = _unitOfWork.Contracts.GetById(id);
+            var contract = _unitOfWork.Contracts.GetAll().Where(x => x.IsDeleted == false).Where(c => c.Id == id).First();
             if (contract != null)
             {
-                _unitOfWork.Contracts.Delete(contract);
+                // Ustawiamy flagę IsDeleted na true
+                contract.IsDeleted = true;
+                // Zapisujemy zmiany w bazie danych
                 _unitOfWork.SaveChanges();
             }
         }

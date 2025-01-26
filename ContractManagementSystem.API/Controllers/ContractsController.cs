@@ -1,4 +1,5 @@
-﻿using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
+﻿using ContractManagementSystem.BL.BusinessLogicServices;
+using ContractManagementSystem.BL.BusinessLogicServices.Interfaces;
 using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.Assemblers;
 using ContractManagementSystem.DAL.DTOs.Contract;
@@ -27,13 +28,13 @@ namespace ContractManagementSystem.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ContractDto> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var contractDtos = _contractService.GetContractById(id);
             if (contractDtos == null)
-                return null;
+                return NotFound("Not Found");
 
-            return contractDtos;
+            return Ok(contractDtos);
         }
 
         [HttpPost]
@@ -51,25 +52,36 @@ namespace ContractManagementSystem.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public Task<ContractDto> Update(Guid id, [FromBody] UpsertContractDto createDto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpsertContractDto createDto)
         {
 
             try
             {
                 _contractService.UpdateContract(id, createDto);
-                return GetById(id);
+                return await GetById(id);
             }
             catch (Exception ex)
             {
-                return null;
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(Guid id)
-        //{
-        //    _contractService.DeleteContract(id);
-        //    return NoContent();
-        //}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                // (ustawiamy IsDeleted na true)
+                _contractService.DeleteContract(id);
+
+                // Zwracamy 200 OK
+                return Ok("Deleted");
+            }
+            catch (Exception ex)
+            {
+                // Zwracamy 500 Internal Server Error z komunikatem błędu
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }
