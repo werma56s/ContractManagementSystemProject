@@ -19,10 +19,11 @@ namespace ContractManagementSystem.DAL.Services
 
         // Repozytoria
         public IRepository<Contract> Contracts => new Repository<Contract>(_context);
-        public IRepository<Addendum> Addendums => new Repository<Addendum>(_context);
+        public IRepository<Annex> Annexes => new Repository<Annex>(_context);
         public IRepository<ProductItem> ProductItems => new Repository<ProductItem>(_context);
         public IRepository<ResponsiblePerson> ResponsiblePersons => new Repository<ResponsiblePerson>(_context);
         public IRepository<Category> Categories => new Repository<Category>(_context);
+        public IRepository<Account> Accounts => new Repository<Account>(_context);
 
         // Zapisuje wszystkie zmiany do bazy
         public int SaveChanges()

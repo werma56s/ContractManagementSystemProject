@@ -17,19 +17,11 @@ namespace ContractManagementSystem.Core.Domain
         public Guid? ModifiedBy { get; set; }
 
         // ----------------------------------------------
-        [Required]
-        [MaxLength(100)]
-        public string FirstName { get; set; } = string.Empty;
+        // Relacja do Account(jedna ResponsiblePerson -> wiele Account)
+        public List<Account> Accounts { get; set; } = new();
 
-        [Required]
-        [MaxLength(100)]
-        public string LastName { get; set; } = string.Empty;
-
-        [MaxLength(100)]
-        public string Position { get; set; } = string.Empty;
-
-        public Guid? AddendumId { get; set; }
-        public Addendum Addendum { get; set; }
+        public Guid? AnnexId { get; set; }
+        public Annex Annexes { get; set; }
     }
 
 }

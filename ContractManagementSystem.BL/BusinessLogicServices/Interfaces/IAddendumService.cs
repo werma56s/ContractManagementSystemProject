@@ -2,12 +2,12 @@
 
 namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
 {
-    public interface IAddendumService
+    public interface IAnnexService
     {
-        IEnumerable<Addendum> GetAllAddendums();
-        Addendum GetAddendumById(Guid id);
-        void AddAddendum(Addendum addendum);
-        void UpdateAddendum(Addendum addendum);
-        void DeleteAddendum(Guid id);
+        IEnumerable<Annex> GetAllAnnex();
+        Annex GetAnnexById(Guid id);
+        void AddAAnnex(Annex addendum);
+        void UpdateAnnex(Annex addendum);
+        void DeleteAnnex(Guid id);
     }
 }

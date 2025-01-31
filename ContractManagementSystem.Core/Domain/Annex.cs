@@ -5,14 +5,13 @@ using System.Diagnostics.Contracts;
 
 namespace ContractManagementSystem.Core.Domain
 {
-    public class Addendum : IDomainEntity
+    public class Annex : IDomainEntity
     {
         [Required]
         public Guid Id { get; set; }
 
         [Required]
         public DateTime DateCreated { get; set; }
-
         [Required]
         public DateTime DateModified { get; set; }
 
@@ -24,7 +23,7 @@ namespace ContractManagementSystem.Core.Domain
 
         // ----------------------------------------------
         [Required]
-        public string AddendumNumber { get; set; } = string.Empty;
+        public string AnnexNumber { get; set; } = string.Empty;
 
         [Required]
         public DateTime SignedDate { get; set; }

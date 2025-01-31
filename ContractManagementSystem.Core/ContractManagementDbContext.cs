@@ -14,8 +14,10 @@ namespace ContractManagementSystem.Core
        : base(options)
         {
         }
+
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Addendum> Addendums { get; set; }
+        public DbSet<Annex> Annexes { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }
         public DbSet<ResponsiblePerson> ResponsiblePersons { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -38,24 +40,31 @@ namespace ContractManagementSystem.Core
                 .IsRequired();
 
             // Configure One-to-Many relationship between Contract and Addendums
-            modelBuilder.Entity<Addendum>()
+            modelBuilder.Entity<Annex>()
                 .HasOne(a => a.Contract)
-                .WithMany(c => c.Addendums)
+                .WithMany(c => c.Annexes)
                 .HasForeignKey(a => a.ContractId)
                 .IsRequired();
 
             // Configure One-to-Many relationship between Addendum and Product Items
             modelBuilder.Entity<ProductItem>()
-                .HasOne(p => p.Addendum)
+                .HasOne(p => p.Annexes)
                 .WithMany(a => a.ProductItems)
-                .HasForeignKey(p => p.AddendumId)
+                .HasForeignKey(p => p.AnnexId)
                 .IsRequired();
 
             // Configure One-to-Many relationship between Addendum and Responsible Persons
             modelBuilder.Entity<ResponsiblePerson>()
-                .HasOne(rp => rp.Addendum)
+                .HasOne(rp => rp.Annexes)
                 .WithMany(a => a.ResponsiblePersons)
-                .HasForeignKey(rp => rp.AddendumId)
+                .HasForeignKey(rp => rp.AnnexId)
+                .IsRequired();
+
+            // Configure One-to-Many relationship between Responsible Persons and Account 
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.ResponsiblePerson)
+                .WithMany(rp => rp.Accounts)
+                .HasForeignKey(a => a.ResponsiblePersonId)
                 .IsRequired();
         }
     }

@@ -18,9 +18,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

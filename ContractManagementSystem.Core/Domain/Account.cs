@@ -4,7 +4,7 @@ using ContractManagementSystem.Core.Enums;
 
 namespace ContractManagementSystem.Core.Domain
 {
-    public class ProductItem : IDomainEntity
+    public class Account : IDomainEntity
     {
         [Required]
         public Guid Id { get; set; }
@@ -22,20 +22,30 @@ namespace ContractManagementSystem.Core.Domain
 
         // ----------------------------------------------
         [Required]
+        [MaxLength(100)]
+        public string FirstName { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; } = string.Empty;
+
+        [MaxLength(100)]
+        public JobPosition Position { get; set; }
+
+        [Required]
         [MaxLength(255)]
-        public string ProductName { get; set; } = string.Empty;
+        public string Email { get; set; }
 
         [Required]
-        public decimal Price { get; set; }
+        public string Password { get; set; }
 
-        [Required]
-        public int Quantity { get; set; }
+        public bool IsActive { get; set; } = true;
 
-        [Required]
-        public ProductType ProductType { get; set; }
+        //
+        // Relacja do ResponsiblePerson (wielu Account -> jedna ResponsiblePerson)
+        public Guid? ResponsiblePersonId { get; set; }
 
-        public Guid? AnnexId { get; set; }
-        public Annex Annexes { get; set; }
+        public ResponsiblePerson ResponsiblePerson { get; set; }
     }
 
 }

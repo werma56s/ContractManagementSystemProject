@@ -17,7 +17,6 @@ namespace ContractManagementSystem.Core.Domain
 
         [Required]
         public DateTime DateCreated { get; set; }
-
         [Required]
         public DateTime DateModified { get; set; }
 
@@ -43,8 +42,8 @@ namespace ContractManagementSystem.Core.Domain
 
         // ----------------------------------------------
         // Relacje
-        // Relacja jeden-do-wielu z Addendum
-        public ICollection<Addendum> Addendums { get; set; } = new List<Addendum>();
+        // Relacja jeden-do-wielu z Annex
+        public ICollection<Annex> Annexes { get; set; } = new List<Annex>();
 
         // Relacja jeden-do-wielu z Category
         [Required]
