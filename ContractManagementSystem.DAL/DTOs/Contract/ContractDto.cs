@@ -1,5 +1,6 @@
 ﻿using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.Core.Interfaces;
+using ContractManagementSystem.DAL.DTOs.Category;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace ContractManagementSystem.DAL.DTOs.Contract
         public decimal Value { get; set; }
         public string? Description { get; set; }
 
-        public CategoryDTO Category { get; set; }
+        public CategoryInContractDTO Category { get; set; }
         //    public Guid CategoryId { get; set; }
         //    public string CategoryName { get; set; } // Opcjonalnie: nazwa kategorii
     }

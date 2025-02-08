@@ -2,10 +2,6 @@
 using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.Assemblers;
 using ContractManagementSystem.DAL.DTOs.Contract;
-
-
-
-//using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices
@@ -45,7 +41,9 @@ namespace ContractManagementSystem.BL.BusinessLogicServices
 
         public void UpdateContract(Guid Id, UpsertContractDto contractDto)
         {
-             var contract = _contractAssemblers.MapToContract(contractDto,Id);
+            if (_unitOfWork.Contracts.GetById(Id) == null || _unitOfWork.Contracts.GetById(Id).IsDeleted)
+                return; // Jeśli contract nie istnieje lub jest usunięty, kończymy metodę.
+            var contract = _contractAssemblers.MapToContract(contractDto,Id);
             _unitOfWork.Contracts.Update(contract);
             _unitOfWork.SaveChanges();
         }
