@@ -1,13 +1,14 @@
 ﻿using ContractManagementSystem.Core.Domain;
+using ContractManagementSystem.DAL.DTOs.Category;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices.Interfaces
 {
     public interface ICategoryService
     {
-        IEnumerable<Category> GetAllCategories();
-        Category GetCategoryById(Guid id);
-        void AddCategory(Category category);
-        void UpdateCategory(Category category);
+        List<CategoryDto> GetAllCategories();
+        CategoryDto GetCategoryById(Guid id);
+        void AddCategory(UpsertCategoryDto category);
+        void UpdateCategory(Guid id, UpsertCategoryDto category);
         void DeleteCategory(Guid id);
     }
 }

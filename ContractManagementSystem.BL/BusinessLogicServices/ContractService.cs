@@ -2,10 +2,6 @@
 using ContractManagementSystem.Core.Domain;
 using ContractManagementSystem.DAL.Assemblers;
 using ContractManagementSystem.DAL.DTOs.Contract;
-
-
-
-//using ContractManagementSystem.DAL.Model;
 using ContractManagementSystem.DAL.Services.Interfaces;
 
 namespace ContractManagementSystem.BL.BusinessLogicServices

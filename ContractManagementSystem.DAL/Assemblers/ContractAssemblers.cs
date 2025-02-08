@@ -20,7 +20,7 @@ namespace ContractManagementSystem.DAL.Assemblers
             StartDate = domain.StartDate,
             EndDate = domain.EndDate,
             Value = domain.Value,
-            Category = new DTOs.CategoryDTO
+            Category = new DTOs.Category.CategoryInContractDTO
             {
                 ID =  domain.Category.Id,
                 Name = domain.Category.Name,
@@ -28,7 +28,7 @@ namespace ContractManagementSystem.DAL.Assemblers
             }
         };
         // Mapowanie ContractDto -> Contract (tu zwykła metoda)
-        public Contract MapToContract( UpsertContractDto dto, Guid? Id = null)
+        public Contract MapToContract(UpsertContractDto dto, Guid? Id = null)
         {
             var contract = new Contract
             {
